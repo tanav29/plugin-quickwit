@@ -73,9 +73,9 @@ Only the current result page comes back, so set `maxHits` when you need more. Us
 
 ## Reacting to new documents
 
-`search.Trigger` polls the index on an interval. It stores the timestamp up to which documents have been delivered in the
-**namespace KV Store** and advances it after every successful poll, so a document is never delivered twice while late
-documents are still picked up on a later poll.
+`search.Trigger` polls the index on an interval. It sorts ascending on `timestampField` and stores the timestamp up to which
+documents have been delivered in the **namespace KV Store**. That watermark advances only after the execution is created, so a
+document is delivered once. Documents that arrive late, with an event timestamp already below the watermark, are not picked up.
 
 ```yaml
 id: quickwit_error_watch
@@ -87,6 +87,7 @@ triggers:
     url: "https://quickwit.example.com:7280"
     index: app-logs
     query: "severity:ERROR"
+    timestampField: timestamp
     interval: PT5M
 
 tasks:
