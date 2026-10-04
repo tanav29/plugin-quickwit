@@ -193,7 +193,8 @@ public class Search extends AbstractQuickwitTask implements RunnableTask<Search.
     @Schema(
         title = "Sort by",
         description = """
-            Fields to sort the results on. You can sort by up to two fast fields, or by the BM25 `_score`.
+            Fields to sort the results on. Prefix a field with `-` to sort ascending or `+` to sort descending.
+            You can sort by up to two fast fields, or by the BM25 `_score`.
             By default Quickwit returns the most recent documents first.
             """
     )

@@ -206,8 +206,9 @@ public class Trigger extends AbstractTrigger implements PollingTriggerInterface,
     @Schema(
         title = "Timestamp field",
         description = """
-            Document field holding the event timestamp in seconds, used to advance the watermark.
+            Document field holding the event timestamp, used to advance the watermark.
             This should be the timestamp field of the index so `start_timestamp` pruning aligns.
+            Its `output_format` must be `rfc3339` (the default) or `unix_timestamp_secs`, the two formats the watermark can parse.
             Polls sort ascending on this field and advance to one past the maximum delivered value.
             """
     )
