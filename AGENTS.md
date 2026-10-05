@@ -99,6 +99,9 @@ plugin-quickwit/
   metadata file, which is why `META-004` is disabled in `build.gradle`; the invariant it would have
   checked is enforced by `MetadataConsistencyTest`.
 - Tests use WireMock (`org.wiremock:wiremock-jetty12`) with `@KestraTest`; no live Quickwit is needed.
+  `QuickwitContainerTest` is the one exception: a single create-ingest-search round-trip against a real
+  node via Testcontainers, aborting where Docker is unavailable. Point `QUICKWIT_IT_URL` at a running
+  node (e.g. `http://localhost:7280`) to run it without Docker.
   Do not name a test method after a WireMock DSL method (`get`, `delete`, `list`): it hides the
   static import and the DSL call silently resolves to the test method.
 - Run `./gradlew build` before pushing. It runs `lintPluginDocs`, the tests and JaCoCo.

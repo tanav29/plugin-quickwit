@@ -99,6 +99,11 @@ dependencies {
 
     // stubs the Quickwit REST API so every task and the trigger are tested without a live cluster
     testImplementation "org.wiremock:wiremock-jetty12"
+
+    // a single live round-trip (create -> ingest -> search) against a real Quickwit node;
+    // WireMock covers the error paths, this covers API drift the stubs cannot catch
+    testImplementation "org.testcontainers:testcontainers:1.20.4"
+    testImplementation "org.testcontainers:junit-jupiter:1.20.4"
 }
 
 /**********************************************************************************************************************\
